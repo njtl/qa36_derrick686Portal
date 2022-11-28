@@ -2,7 +2,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
@@ -75,13 +74,22 @@ public class TestBase {
         WebElement clients = wd.findElement(By.xpath("//*[@id=\"home-header1\"]/div/div[1]/ul/li[2]/a"));
     }
 
-    public Boolean searchOnPage(String text){
+    public Boolean searchInPageSource(String text){
         return wd.getPageSource().contains(text);
+    }
+
+    public void searchByLinkText(String text){
+        wd.findElement(By.partialLinkText(text));
     }
 
     public void logout() {
         wd.findElement(By.id("navbarDropdown")).click();
+        //Find element by class name via cssSelector
+        //Attention to that spaces in class name are replaced by dots for css selector
         wd.findElement(By.cssSelector(".d-item.d-flex.justify-content-start.align-items-center.navigate")).click();
+
+        //Second option: locate a link by its text
+        //wd.findElement(By.partialLinkText("Sign Out")).click();
     }
 
     public void openLoginPage(){
