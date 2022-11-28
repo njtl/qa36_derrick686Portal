@@ -9,7 +9,7 @@ public class TestAllUserTypes extends TestBase {
     public void beforeMOpenLoginPage(){
         System.out.println("Running before method: opening login page");
 
-        //Precondition for each page: user is not logged in, login page is opened in browser
+        //Precondition for each test: user is not logged in, login page is opened in browser
         openLoginPage();
     }
 
