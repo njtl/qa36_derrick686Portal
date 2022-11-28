@@ -9,6 +9,8 @@ import org.testng.annotations.Test;
 
 public class TestSetVerifyLogin extends TestBase {
 
+
+
     @Test
     public void BadAuthTest() throws InterruptedException {
         //try to auth with bad creds
