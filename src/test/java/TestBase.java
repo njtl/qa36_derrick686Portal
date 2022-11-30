@@ -1,18 +1,27 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 
+
 public class TestBase {
+    final static Logger logger = LoggerFactory.getLogger(TestBase.class);
+
     WebDriver wd;
 
-    @BeforeTest
+    @BeforeSuite
     public void Prepare(){
         wd = new ChromeDriver();
         wd.get("https://derrick686.softr.app/login");
         wd.manage().window().maximize();
+        logger.info("Running a test: prepare in BeforeSuite, initializing WebDriver, maximizing window and opening login page ");
     }
 
 
@@ -92,11 +101,26 @@ public class TestBase {
         //wd.findElement(By.partialLinkText("Sign Out")).click();
     }
 
+    public void openClientsPage()
+    {
+        wd.get("https://derrick686.softr.app/clients");
+    }
+
+    public void searchClientsBy(String stringS) throws InterruptedException {
+        WebElement input = wd.findElement(By.xpath("//*[@id=\"list2\"]/div[1]/div/div/div/input"));
+        input.click();
+        input.clear();
+        input.sendKeys(stringS);
+        input.sendKeys(Keys.ENTER);
+        Thread.sleep(2000);
+    }
+
     public void openLoginPage(){
         wd.get("https://derrick686.softr.app/login");
     }
-    @AfterTest
+    @AfterSuite
     public void exit(){
         wd.quit();
+        logger.info("Ending test in AftersSuite and quiting browser");
     }
 }

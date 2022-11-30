@@ -4,10 +4,16 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.lang.reflect.Method;
+import java.util.Arrays;
+
+
 public class TestAllUserTypes extends TestBase {
     @BeforeMethod
-    public void beforeMOpenLoginPage(){
+    public void beforeMOpenLoginPage(Method m, Object[] p){
         System.out.println("Running before method: opening login page");
+
+        logger.info("Starting method: " + m.getName()+" with data: "+ Arrays.asList(p));
 
         //Precondition for each test: user is not logged in, login page is opened in browser
         openLoginPage();
@@ -16,6 +22,7 @@ public class TestAllUserTypes extends TestBase {
     @Test
     public void LoginAsManager() throws InterruptedException {
         System.out.println("Running test LoginAsManager");
+        logger.info("Starting method login");
 
         //Authenticate as a manager
         managerAuth();
