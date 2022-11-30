@@ -49,9 +49,9 @@ public class TestClientSearch extends TestBase {
         logger.info("Found " + searchResults.size() + " results. Expected: "+ expectedSearchResults);
         Assert.assertEquals(searchResults.size(), expectedSearchResults);
         logger.info("Searching for one client Lucie displayed, Loree not displayed");
-        Assert.assertTrue(searchInPageSource("lucie"));
-        Assert.assertFalse(searchInPageSource("loree"));
-        Assert.assertTrue(searchInPageSource("billye"));
+        Assert.assertTrue(searchInPageSource("lucie@example.com"));
+        Assert.assertFalse(searchInPageSource("loree@example.com"));
+        Assert.assertTrue(searchInPageSource("billye@example.com"));
         logger.info("Test "+methodName+" finished, passed");
     }
 
@@ -69,9 +69,9 @@ public class TestClientSearch extends TestBase {
         logger.info("Found " + searchResults.size() + " results. Expected: "+ expectedSearchResults);
         Assert.assertEquals(searchResults.size(), expectedSearchResults);
         logger.info("Searching for clients Lucie and billye displayed, Loree not displayed");
-        Assert.assertTrue(searchInPageSource("edra"));
-        Assert.assertFalse(searchInPageSource("loree"));
-        Assert.assertTrue(searchInPageSource("billye"));
+        Assert.assertTrue(searchInPageSource("edra@example.com"));
+        Assert.assertFalse(searchInPageSource("loree@example.com"));
+        Assert.assertTrue(searchInPageSource("billye@example.com"));
         logger.info("Test "+methodName+" finished, passed");
     }
 
@@ -90,9 +90,9 @@ public class TestClientSearch extends TestBase {
         Assert.assertEquals(searchResults.size(), expectedSearchResults);
 
         logger.info("Searching for one client billye displayed, Loree and Lucie not displayed");
-        Assert.assertFalse(searchInPageSource("Dominica"));
-        Assert.assertFalse(searchInPageSource("loree"));
-        Assert.assertTrue(searchInPageSource("billye"));
+        Assert.assertFalse(searchInPageSource("dominica@example.com"));
+        Assert.assertFalse(searchInPageSource("loree@example.com"));
+        Assert.assertTrue(searchInPageSource("billye@example.com"));
         logger.info("Test "+methodName+" finished, passed");
 
     }
@@ -113,9 +113,9 @@ public class TestClientSearch extends TestBase {
         logger.error("Test passed " + methodName + ". Expected and actual results"+searchResults.size() + " " + expectedSearchResults);
 
         logger.info("Searching for one client Lucie displayed, Loree and billye not displayed");
-        Assert.assertTrue(searchInPageSource("lucie"));
-        Assert.assertFalse(searchInPageSource("loree"));
-        Assert.assertFalse(searchInPageSource("billye"));
+        Assert.assertTrue(searchInPageSource("lucie@example.com"));
+        Assert.assertFalse(searchInPageSource("loree@example.com"));
+        Assert.assertFalse(searchInPageSource("billye@example.com"));
         logger.info("Test "+methodName+" finished, passed");
     }
 
