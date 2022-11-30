@@ -42,7 +42,7 @@ public class TestClientSearch extends TestBase {
 
         String companyName = "Worman";
 
-        logger.info("Searching for a company with a random company name: "+companyName);
+        logger.info("Searching for clients with a random company name: "+companyName);
         searchClientsBy(companyName);
         int expectedSearchResults = 1;
         List<WebElement> searchResults = wd.findElements(By.xpath("//*[@id=\"list2\"]/div[2]/div/div/div[1]/div"));
@@ -57,7 +57,7 @@ public class TestClientSearch extends TestBase {
 
         String companyName = "Montag";
 
-        logger.info("Searching for a company with a random company name: "+companyName);
+        logger.info("Searching for clients with a random company name: "+companyName);
         searchClientsBy(companyName);
         int expectedSearchResults = 2;
         List<WebElement> searchResults = wd.findElements(By.xpath("//*[@id=\"list2\"]/div[2]/div/div/div[1]/div"));
@@ -72,7 +72,7 @@ public class TestClientSearch extends TestBase {
 
         String clientName = "billye";
 
-        logger.info("Searching for a company with a random company name: "+clientName);
+        logger.info("Searching for clients with a random company name: "+clientName);
         searchClientsBy(clientName);
         int expectedSearchResults = 1;
         List<WebElement> searchResults = wd.findElements(By.xpath("//*[@id=\"list2\"]/div[2]/div/div/div[1]/div"));
@@ -87,7 +87,7 @@ public class TestClientSearch extends TestBase {
 
         String clientName = "lucie";
 
-        logger.info("Searching for a company with a random company name: "+clientName);
+        logger.info("Searching for clients with a random company name: "+clientName);
         searchClientsBy(clientName);
         int expectedSearchResults = 1;
         List<WebElement> searchResults = wd.findElements(By.xpath("//*[@id=\"list2\"]/div[2]/div/div/div[1]/div"));
