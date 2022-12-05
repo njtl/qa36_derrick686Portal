@@ -54,6 +54,7 @@ public class TestBase extends DataProviders {
     }
 
 
+
     public void consultantAuth() throws InterruptedException {
         auth("edra@example.com", "123456");
     }

@@ -14,13 +14,13 @@ import java.util.Iterator;
 import java.util.List;
 
 public class TestSetVerifyLogin extends TestBase {
-/*
+
     @BeforeMethod
     public void runBeforeMethod(Method m, Object[] p){
         logger.info("Starting method: " + m.getName()+" with data: "+ Arrays.asList(p));
-    }*/
+    }
 
-/*
+
     @DataProvider
     public Iterator<Object[]> getWrongLoginData(){
         List<Object[]> list = new ArrayList<>();
@@ -30,7 +30,7 @@ public class TestSetVerifyLogin extends TestBase {
         list.add(new Object[]{"biley_example.com","123456"});
 
         return list.iterator();
-    }*/
+    }
 
 
 
@@ -45,12 +45,12 @@ public class TestSetVerifyLogin extends TestBase {
         Assert.assertEquals(wd.getPageSource().contains(text),Boolean.TRUE);
     }
 
-/*    @Test(dataProvider = "getWrongCredsFromCSV")
+    @Test(dataProvider = "getWrongCredsFromCSV")
     public void BadAuthTestWithDataProvider(String email, String pwd) throws InterruptedException {
         auth(email, pwd);
         String text = "Invalid email or password";
         Assert.assertEquals(wd.getPageSource().contains(text),Boolean.TRUE);
-    }*/
+    }
 
     @Test
     public void ManagerAuthTest() throws InterruptedException {
