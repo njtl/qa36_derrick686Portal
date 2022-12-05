@@ -13,7 +13,7 @@ public class DataProviders extends TestBase{
 
         String line = reader.readLine();
         while (line != null) {
-            String[] split = line.split(",");
+            String[] split = line.split(",",-1);
             logger.info(Arrays.toString(split));
             list.add(split);
             line = reader.readLine();
@@ -32,7 +32,7 @@ public class DataProviders extends TestBase{
 
         while (line != null)
         {
-            String[] split = line.split(",");
+            String[] split = line.split(",",-1);
             logger.info(Arrays.toString(split));
 
             list.add(split);

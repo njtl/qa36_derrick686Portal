@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Objects;
 
 
 public class TestAllUserTypes extends TestBase {
@@ -67,12 +68,22 @@ public class TestAllUserTypes extends TestBase {
     }
 
     @Test(dataProvider = "positiveCredsFromCSV", dataProviderClass=DataProviders.class)
-    public void goodAuthTestWithDataProviderCSV(String email, String pwd, String ver) throws InterruptedException {
+    public void goodAuthTestWithDataProviderCSV(String email, String pwd, String elementsTrue, String elementsFalse) throws InterruptedException {
         auth(email, pwd);
 
-        String[] verifications = ver.split(";");
-        for (String verification : verifications) {
+        //Check if splitted by ; strings from elementsTrue are presented on the page as links
+        String[] presented = elementsTrue.split(";");
+        for (String verification : presented) {
             wd.findElement(By.partialLinkText(verification));
+        }
+
+        //Check if splitted by ; strings from elementsFalse are not presented on the page as links (excluding space characters from verifications)
+        String[] notpresented = elementsFalse.split(";");
+        for (String verification : notpresented) {
+            if (!Objects.equals(verification, ""))
+            {
+                Assert.assertEquals(wd.findElements(By.partialLinkText(verification)).size(), 0);
+            }
         }
     }
 
