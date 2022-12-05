@@ -1,12 +1,9 @@
-import javafx.beans.binding.ObjectExpression;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,11 +42,19 @@ public class TestSetVerifyLogin extends TestBase {
         Assert.assertEquals(wd.getPageSource().contains(text),Boolean.TRUE);
     }
 
-    @Test(dataProvider = "getWrongCredsFromCSV")
-    public void BadAuthTestWithDataProvider(String email, String pwd) throws InterruptedException {
-        auth(email, pwd);
+
+
+
+
+    @Test
+    public void goodAuthTest() throws InterruptedException {
+        //auth as a manager
+        managerAuth();
+
+        //Check for Clients link on the page
+        checkClientsLink();        //Verify there's no error message on the screen
         String text = "Invalid email or password";
-        Assert.assertEquals(wd.getPageSource().contains(text),Boolean.TRUE);
+        Assert.assertEquals(wd.getPageSource().contains(text),Boolean.FALSE);
     }
 
     @Test
@@ -71,10 +76,10 @@ public class TestSetVerifyLogin extends TestBase {
         managerAuth();
         checkClientsLink();
     }
-/*
+
     @AfterMethod
     public void afterMLogout(Method m, Object[] p){
         logger.info("Quiting method: " + m.getName()+" with data: "+ Arrays.asList(p));
-    }*/
+    }
 
 }

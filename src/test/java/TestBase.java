@@ -1,4 +1,3 @@
-import javafx.application.Application;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
 
 
-public class TestBase extends DataProviders {
+public class TestBase {
     final static Logger logger = LoggerFactory.getLogger(TestBase.class);
 
 
@@ -80,16 +79,13 @@ public class TestBase extends DataProviders {
     }
 
     public void checkClientsLink(){
-        WebElement clients = wd.findElement(By.xpath("//*[@id=\"home-header1\"]/div/div[1]/ul/li[2]/a"));
+        wd.findElement(By.xpath("//*[@id=\"home-header1\"]/div/div[1]/ul/li[2]/a"));
     }
 
     public Boolean searchInPageSource(String text){
         return wd.getPageSource().contains(text);
     }
 
-    public void searchByLinkText(String text){
-        wd.findElement(By.partialLinkText(text));
-    }
 
     public void logout() {
         wd.findElement(By.id("navbarDropdown")).click();

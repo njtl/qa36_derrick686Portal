@@ -11,8 +11,6 @@ import java.util.Arrays;
 public class TestAllUserTypes extends TestBase {
     @BeforeMethod
     public void beforeMOpenLoginPage(Method m, Object[] p){
-        System.out.println("Running before method: opening login page");
-
         logger.info("Starting method: " + m.getName()+" with data: "+ Arrays.asList(p));
 
         //Precondition for each test: user is not logged in, login page is opened in browser
@@ -66,6 +64,23 @@ public class TestAllUserTypes extends TestBase {
         wd.findElement(By.partialLinkText("CLIENTS"));
         wd.findElement(By.partialLinkText("TEAM"));
         wd.findElement(By.partialLinkText("INVOICES"));
+    }
+
+    @Test(dataProvider = "positiveCredsFromCSV", dataProviderClass=DataProviders.class)
+    public void goodAuthTestWithDataProviderCSV(String email, String pwd, String ver) throws InterruptedException {
+        auth(email, pwd);
+
+        String[] verifications = ver.split(";");
+        for (String verification : verifications) {
+            wd.findElement(By.partialLinkText(verification));
+        }
+    }
+
+    @Test(dataProvider = "getWrongCredsFromCSV", dataProviderClass = DataProviders.class)
+    public void BadAuthTestWithDataProvider(String email, String pwd) throws InterruptedException {
+        auth(email, pwd);
+        String text = "Invalid email or password";
+        Assert.assertEquals(wd.getPageSource().contains(text),Boolean.TRUE);
     }
 
     @AfterMethod
