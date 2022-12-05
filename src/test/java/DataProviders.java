@@ -1,3 +1,6 @@
+import com.github.hemanthsridhar.CSVUtils;
+import com.github.hemanthsridhar.ExcelUtils;
+import com.github.hemanthsridhar.lib.ExtUtils;
 import org.testng.annotations.DataProvider;
 
 import java.io.*;
@@ -23,4 +26,19 @@ public class DataProviders {
 
         return list.iterator();
     }
+
+    //    Документация - https://github.com/hemanthsridhar/testng-excel-dataprovider
+    @DataProvider
+    public Object[][] excelWrongDataRead() throws Exception {
+        ExtUtils ext = new ExcelUtils("src/test/resources/excelData.xlsx", "wrongData");
+        return ext.parseData();
+    }
+
+    @DataProvider
+    public Object[][] csvWrongDataRead() throws Exception {
+        String path = "src/test/resources/wrong_creds.csv";
+        ExtUtils ext = new CSVUtils(path, true);
+        return ext.parseData();
+    }
+
 }
