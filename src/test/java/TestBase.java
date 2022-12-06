@@ -3,6 +3,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.Browser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.*;
@@ -13,13 +15,30 @@ public class TestBase {
 
 
     WebDriver wd;
+    String browser;
 
-    @BeforeSuite
+    @BeforeSuite(alwaysRun=true)
     public void Prepare(){
-        wd = new ChromeDriver();
+        logger.info("Running a test: prepare in BeforeSuite, initializing WebDriver, maximizing window and opening login page ");
+        String path;
+
+        browser = System.getProperty("browser");
+        logger.info("Running test system property browser set to " + browser);
+
+        if (browser.equals(Browser.CHROME.browserName())) {
+            path = System.getenv("chromeDriver");
+            System.setProperty("webdriver.chrome.driver", path);
+            wd = new ChromeDriver();
+        } else if (browser.equals(Browser.FIREFOX.browserName())) {
+            path = System.getenv("firefoxDriver");
+            System.setProperty("webdriver.gecko.driver", path);
+            wd = new FirefoxDriver();
+        }  else {
+            logger.error("No supported browser specified. Supported browsers: chrome, firefox,edge, opera");
+        }
+
         wd.get("https://derrick686.softr.app/login");
         wd.manage().window().maximize();
-        logger.info("Running a test: prepare in BeforeSuite, initializing WebDriver, maximizing window and opening login page ");
     }
 
 
@@ -114,7 +133,7 @@ public class TestBase {
     public void openLoginPage(){
         wd.get("https://derrick686.softr.app/login");
     }
-    @AfterSuite
+    @AfterSuite(alwaysRun=true)
     public void exit(){
         wd.quit();
         logger.info("Ending test in AftersSuite and quiting browser");

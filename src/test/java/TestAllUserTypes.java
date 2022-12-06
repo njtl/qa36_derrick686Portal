@@ -10,7 +10,7 @@ import java.util.Objects;
 
 
 public class TestAllUserTypes extends TestBase {
-    @BeforeMethod
+    @BeforeMethod(alwaysRun=true)
     public void beforeMOpenLoginPage(Method m, Object[] p){
         logger.info("Starting method: " + m.getName()+" with data: "+ Arrays.asList(p));
 
@@ -18,9 +18,9 @@ public class TestAllUserTypes extends TestBase {
         openLoginPage();
     }
 
-    @Test
+    @Test(priority = 3)
     public void LoginAsManager() throws InterruptedException {
-        System.out.println("Running test LoginAsManager");
+        logger.info("Running test LoginAsManager");
         logger.info("Starting method login");
 
         //Authenticate as a manager
@@ -32,9 +32,9 @@ public class TestAllUserTypes extends TestBase {
         wd.findElement(By.partialLinkText("INVOICES"));
     }
 
-    @Test
+    @Test(priority = 3)
     public void LoginAsClient() throws InterruptedException {
-        System.out.println("Running test LoginAsClient");
+        logger.info("Running test LoginAsClient");
 
         //Authenticate as a client
         clientAuth();
@@ -53,9 +53,9 @@ public class TestAllUserTypes extends TestBase {
         Assert.assertTrue(wd.findElements(By.partialLinkText("TEAM")).isEmpty());
     }
 
-    @Test
+    @Test(priority = 2)
     public void LoginAsConsultant() throws InterruptedException {
-        System.out.println("Running test LoginAsConsultant");
+        logger.info("Running test LoginAsConsultant");
 
         //Authenticate as a consultant
         consultantAuth();
@@ -67,7 +67,7 @@ public class TestAllUserTypes extends TestBase {
         wd.findElement(By.partialLinkText("INVOICES"));
     }
 
-    @Test(dataProvider = "positiveCredsFromCSV", dataProviderClass=DataProviders.class)
+    @Test(dataProvider = "positiveCredsFromCSV", dataProviderClass=DataProviders.class, priority = 1, groups = "smoke")
     public void goodAuthTestWithDataProviderCSV(String email, String pwd, String elementsTrue, String elementsFalse) throws InterruptedException {
         auth(email, pwd);
 
@@ -77,7 +77,7 @@ public class TestAllUserTypes extends TestBase {
             wd.findElement(By.partialLinkText(verification));
         }
 
-        //Check if splitted by ; strings from elementsFalse are not presented on the page as links (excluding space characters from verifications)
+        //Check if split by ; strings from elementsFalse are not presented on the page as links (excluding space characters from verifications)
         String[] notpresented = elementsFalse.split(";");
         for (String verification : notpresented) {
             if (!Objects.equals(verification, ""))
@@ -87,16 +87,20 @@ public class TestAllUserTypes extends TestBase {
         }
     }
 
-    @Test(dataProvider = "getWrongCredsFromCSV", dataProviderClass = DataProviders.class)
+    @Test(dataProvider = "getWrongCredsFromCSV", dataProviderClass = DataProviders.class, priority = 0, groups = "smoke")
     public void BadAuthTestWithDataProvider(String email, String pwd) throws InterruptedException {
         auth(email, pwd);
         String text = "Invalid email or password";
         Assert.assertEquals(wd.getPageSource().contains(text),Boolean.TRUE);
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun=true)
     public void afterMLogout(){
-        logout();
-        System.out.println("Running after method: logging current user out");
+        try {
+            logout();
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+        }
+        logger.info("Running after method: logging current user out");
     }
 }
