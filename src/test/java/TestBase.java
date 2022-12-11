@@ -22,15 +22,15 @@ public class TestBase {
         logger.info("Running a test: prepare in BeforeSuite, initializing WebDriver, maximizing window and opening login page ");
         String path;
 
-        browser = System.getProperty("browser");
+        browser = System.getProperty("browser"); //-Dbrowser=chrome
         logger.info("Running test system property browser set to " + browser);
 
         if (browser.equals(Browser.CHROME.browserName())) {
-            path = System.getenv("chromeDriver");
+            path = System.getenv("chromeDriver"); // chromeDriver=/Users/ilya/telran/Tools/chromedriver
             System.setProperty("webdriver.chrome.driver", path);
             wd = new ChromeDriver();
         } else if (browser.equals(Browser.FIREFOX.browserName())) {
-            path = System.getenv("firefoxDriver");
+            path = System.getenv("firefoxDriver"); // firefoxDriver=/Users/ilya/telran/Tools/geckodriver
             System.setProperty("webdriver.gecko.driver", path);
             wd = new FirefoxDriver();
         }  else {
