@@ -1,5 +1,6 @@
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -30,7 +31,21 @@ public class TestAllUserTypes extends TestBase {
         wd.findElement(By.partialLinkText("CLIENTS"));
         wd.findElement(By.partialLinkText("TEAM"));
         wd.findElement(By.partialLinkText("INVOICES"));
+
     }
+
+    @Test(priority = 3, enabled=false)
+    public void thisTestShouldFail_LoginAsManager() throws InterruptedException {
+        logger.info("Running test LoginAsManager");
+        logger.info("Starting method login");
+
+        //Authenticate as a manager
+        managerAuth();
+        wd.findElement(By.partialLinkText("ljksand93923s"));
+    }
+
+
+
 
     @Test(priority = 3)
     public void LoginAsClient() throws InterruptedException {
@@ -95,12 +110,17 @@ public class TestAllUserTypes extends TestBase {
     }
 
     @AfterMethod(alwaysRun=true)
-    public void afterMLogout(){
+    public void afterMLogout(ITestResult result){
+        if (!result.isSuccess()) {
+            logger.error("Failed test: " +result.getMethod().getMethodName()+" screenshot: "+takeScreenshot());
+        }
+
         try {
             logout();
         } catch (Exception e) {
             logger.info(e.getMessage());
         }
+
         logger.info("Running after method: logging current user out");
     }
 }

@@ -42,8 +42,19 @@ public class TestSetVerifyLogin extends TestBase {
         Assert.assertEquals(wd.getPageSource().contains(text),Boolean.TRUE);
     }
 
+    @Test(enabled = true)
+    public void BadAuthTest_withRecording() throws InterruptedException {
+        startRecording();
+        //try to auth with bad creds
+        badAuth();
+        Thread.sleep(1000);
 
-
+        //Verify there's an error message displayed
+        String text = "Invalid email or password";
+        Assert.assertEquals(wd.getPageSource().contains(text),Boolean.TRUE);
+        Thread.sleep(1000);
+        stopRecoding();
+    }
 
 
     @Test
