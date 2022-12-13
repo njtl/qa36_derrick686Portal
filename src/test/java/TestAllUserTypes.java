@@ -34,7 +34,7 @@ public class TestAllUserTypes extends TestBase {
 
     }
 
-    @Test(priority = 3, enabled=true)
+    @Test(priority = 3, enabled=false)
     public void thisTestShouldFail_LoginAsManager() throws InterruptedException {
         logger.info("Running test LoginAsManager");
         logger.info("Starting method login");

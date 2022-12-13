@@ -43,7 +43,7 @@ public class TestSetVerifyLogin extends TestBase {
         Assert.assertEquals(wd.getPageSource().contains(text),Boolean.TRUE);
     }
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     public void BadAuthTest_withRecording() throws InterruptedException {
         startRecording();
         //try to auth with bad creds

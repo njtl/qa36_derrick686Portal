@@ -42,7 +42,7 @@ public class TestBase {
 
     @BeforeSuite(alwaysRun=true)
     public void Prepare(){
-        deleteAllRecordings();
+        //deleteAllRecordings();
 
         logger.info("Running a test: prepare in BeforeSuite, initializing WebDriver, maximizing window and opening login page ");
         String path;
