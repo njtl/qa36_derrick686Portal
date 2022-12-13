@@ -34,7 +34,7 @@ public class TestAllUserTypes extends TestBase {
 
     }
 
-    @Test(priority = 3, enabled=false)
+    @Test(priority = 3, enabled=true)
     public void thisTestShouldFail_LoginAsManager() throws InterruptedException {
         logger.info("Running test LoginAsManager");
         logger.info("Starting method login");
@@ -42,6 +42,8 @@ public class TestAllUserTypes extends TestBase {
         //Authenticate as a manager
         managerAuth();
         wd.findElement(By.partialLinkText("ljksand93923s"));
+        wd.findElement(By.partialLinkText("PROJECT OVERVIEW"));
+        wd.findElement(By.partialLinkText("CLIENTS"));
     }
 
 

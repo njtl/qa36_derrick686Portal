@@ -47,6 +47,7 @@ public class TestBase {
         logger.info("Running a test: prepare in BeforeSuite, initializing WebDriver, maximizing window and opening login page ");
         String path;
 
+        /*
         browser = System.getProperty("browser"); //-Dbrowser=chrome
         logger.info("Running test system property browser set to " + browser);
 
@@ -61,7 +62,7 @@ public class TestBase {
         }  else if (browser.equals(Browser.OPERA.browserName())) {
             path = System.getenv("operaDriver");
             System.setProperty("webdriver.chrome.driver", path);
-            wd = new ChromeDriver();
+            //wd = new OperaDriver();
         } else if (browser.equals(Browser.EDGE.browserName())) {
             path = System.getenv("edgeDriver");
             System.setProperty("webdriver.edge.driver", path);
@@ -69,6 +70,10 @@ public class TestBase {
         } else {
             logger.error("No supported browser specified. Supported browsers: chrome, firefox,edge, opera");
         }
+        */
+
+        System.setProperty("webdriver.chrome.driver", "/Users/ilya/telran/Tools/chromedriver");
+        wd = new ChromeDriver();
 
         wd.get("https://derrick686.softr.app/login");
         wd.manage().window().maximize();

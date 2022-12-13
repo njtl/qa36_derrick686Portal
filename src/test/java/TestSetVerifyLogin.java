@@ -15,6 +15,7 @@ public class TestSetVerifyLogin extends TestBase {
     @BeforeMethod
     public void runBeforeMethod(Method m, Object[] p){
         logger.info("Starting method: " + m.getName()+" with data: "+ Arrays.asList(p));
+        //deleteAllRecordings();
     }
 
 
