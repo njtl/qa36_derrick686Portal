@@ -35,7 +35,7 @@ public class TestBase {
 
     private ScreenRecorder sr;
 
-    WebDriver wd;
+    public static WebDriver wd;
     String browser;
 
     String recordsFolder= "src/test/resources/records";
@@ -72,7 +72,7 @@ public class TestBase {
         }
         */
 
-        System.setProperty("webdriver.chrome.driver", "/Users/ilya/telran/Tools/chromedriver");
+        //System.setProperty("webdriver.chrome.driver", "/Users/ilya/telran/Tools/chromedriver");
         wd = new ChromeDriver();
 
         wd.get("https://derrick686.softr.app/login");
@@ -231,7 +231,7 @@ public class TestBase {
         wd.get("https://derrick686.softr.app/login");
     }
     @AfterSuite(alwaysRun=true)
-    public void exit(ITestResult result){
+    public void exit(){
         wd.quit();
         logger.info("Ending test in AftersSuite and quiting browser");
     }
